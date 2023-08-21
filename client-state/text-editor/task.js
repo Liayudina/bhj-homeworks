@@ -1,13 +1,18 @@
-const editor = document.getElementById('editor');
-editor.value = localStorage.getItem('textEditor');
+const storedText = localStorage.getItem('text');
+const textEditor = document.getElementById('editor');
 
-editor.addEventListener('input', (event) => {
-    localStorage.setItem('textEditor', editor.value);
-});
 
-const clear = document.getElementById('clearTextEditor');
+if(storedText !== null) {
+    textEditor.value = storedText;
+}
 
-clear.addEventListener('click', () => {
-    localStorage.removeItem('textEditor');
-    editor.value = '';
-});
+textEditor.addEventListener('input', () => {
+    localStorage.setItem('text', textEditor.value);
+})
+
+
+const removeBtn = document.getElementById('remove_btn');
+removeBtn.addEventListener('click', () => {
+    textEditor.value = '';
+    localStorage.removeItem('text');
+})
